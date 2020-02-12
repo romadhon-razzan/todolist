@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Container, Input, Button, Row, Col, Card, CardBody } from 'reactstrap';
+import { Form, Container, Input, Button, Row, Col, Card, CardBody, FormGroup, Label } from 'reactstrap';
 import styled from 'styled-components';
 class FormList extends React.Component{
     constructor(props){
@@ -13,26 +13,21 @@ class FormList extends React.Component{
     removeItem (pos) {
         return((event)=>{
             var tempItem = [...this.state.listItem]; 
-            if (pos !== -1) {
-                tempItem.splice(pos, 1);
-                this.setState({listItem: tempItem});
-            }
+            tempItem.splice(pos, 1);
+            this.setState({listItem: tempItem});
             event.preventDefault()
         });
     }
     inputListener = (event) => { this.setState({ item: event.target.value }) }
     render(){
-        const StyleForm = styled.div`
-            width: 50%;
-            margin: auto;
-        `;
         const StyleItem = styled.div`
             height: 50px;
-            background-color: #F1F8E9;
+            background-color: #F3E5F5;
             border-bottom: 2px solid grey;
             border-radius: 10px;
             margin-top: 10px;
             padding-left: 10px;
+            padding-right: 10px;
             padding-top: 10px;
         `;
         return(
@@ -47,15 +42,17 @@ class FormList extends React.Component{
                             <Card>
                                 <CardBody>
                                     <Form onSubmit={this.submitItem}>
-                                        <Input value={this.state.item} onChange={this.inputListener}/>
+                                        <Input type="text" placeholder="Ketik sesuatu kemudian tekan ENTER" value={this.state.item} onChange={this.inputListener}/>
                                     </Form>
                                     <hr/>
                                     <div>
                                         { this.state.listItem.map((item, index) => 
                                                 <StyleItem key={index}>
-                                                    {item}
                                                     <Form onSubmit={this.removeItem(index)}>
-                                                        <Button value={item} close type="submit"/>
+                                                        <FormGroup>
+                                                            <Label for="btnRemove">{item}</Label>
+                                                            <Button id="btnRemove" close type="submit"/>
+                                                        </FormGroup>
                                                     </Form>
                                                 </StyleItem>
                                             )}
