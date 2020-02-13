@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Container, Input, Button, Row, Col, Card, CardBody, FormGroup, Label } from 'reactstrap';
+import { Form, Container, Input, Button, Row, Col, Card, CardBody, FormGroup, Label, InputGroup, InputGroupAddon } from 'reactstrap';
 import styled from 'styled-components';
 class FormList extends React.Component{
     constructor(props){
@@ -32,21 +32,24 @@ class FormList extends React.Component{
             padding-right:10px;
         `;
         return(
-            <div>
                 <Container>
                     <Row>
                         <Col/>
-                        <Col lg="8"> 
-                            <h3>
-                                <u>TODO List</u>
-                            </h3>
+                        <Col lg="6"> 
+                            <h3><u>TODO List</u></h3>
                             <Card>
                                 <CardBody>
-                                    <Form onSubmit={this.submitItem}>
-                                        <Input type="text" placeholder="Ketik sesuatu kemudian tekan (ENTER)" value={this.state.item} onChange={this.inputListener}/>
-                                    </Form>
+                                    <Form onSubmit={this.submitItem} >
+                                            <FormGroup>
+                                            <InputGroup>
+                                                <Input placeholder="Ingin menambahkan sesuatu ?" value={this.state.item} onChange={this.inputListener}/>
+                                                <InputGroupAddon addonType="append">
+                                                <Button color="primary">Tambah</Button>
+                                                </InputGroupAddon>
+                                            </InputGroup>
+                                            </FormGroup>
+                                        </Form>    
                                     <hr/>
-                                    <div>
                                         { this.state.listItem.map((item, index) => 
                                                 <StyleItem key={index}>
                                                     <Form onSubmit={this.removeItem(index)}>
@@ -56,15 +59,13 @@ class FormList extends React.Component{
                                                         </FormGroup>
                                                     </Form>
                                                 </StyleItem>
-                                            )}
-                                    </div>
+                                        )}
                                 </CardBody>
                             </Card>
                         </Col>
                         <Col/>
                     </Row>
                 </Container>
-            </div>
         );
     }
 }
