@@ -8,7 +8,8 @@ class FormList extends React.Component{
     }
     submitItem = (event) => {
         event.preventDefault()
-        this.setState({ item:'', listItem: [...this.state.listItem, this.state.item] })
+        if (this.state.item != '')
+            this.setState({ item:'', listItem: [...this.state.listItem, this.state.item] })
     }
     removeItem (pos) {
         return((event)=>{
@@ -26,9 +27,9 @@ class FormList extends React.Component{
             border-bottom: 2px solid grey;
             border-radius: 10px;
             margin-top: 10px;
-            padding-left: 10px;
-            padding-right: 10px;
             padding-top: 10px;
+            padding-left:10px;
+            padding-right:10px;
         `;
         return(
             <div>
@@ -42,7 +43,7 @@ class FormList extends React.Component{
                             <Card>
                                 <CardBody>
                                     <Form onSubmit={this.submitItem}>
-                                        <Input type="text" placeholder="Ketik sesuatu kemudian tekan ENTER" value={this.state.item} onChange={this.inputListener}/>
+                                        <Input type="text" placeholder="Ketik sesuatu kemudian tekan (ENTER)" value={this.state.item} onChange={this.inputListener}/>
                                     </Form>
                                     <hr/>
                                     <div>
