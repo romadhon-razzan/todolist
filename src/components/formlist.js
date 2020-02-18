@@ -51,16 +51,16 @@ class FormList extends React.Component {
     inputListener = (event) => { this.setState({ item: event.target.value }) }
     editListener = (event) => { this.setState({ editItem: event.target.value }) }
     render() {
-        const StyleItem = styled.div`
-            height: 50px;
-            background-color: #F3E5F5;
-            border-bottom: 2px solid grey;
-            border-radius: 10px;
-            margin-top: 10px;
-            padding-top: 10px;
-            padding-left:10px;
-            padding-right:10px;
-        `;
+
+        const Optbtn = styled.button`
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        margin-right: 4px;
+        padding: 4px 8px;
+        font-size: 16px;
+        cursor: pointer;`;
+        
 
         const modalStyle = {
             content: {
@@ -94,10 +94,18 @@ class FormList extends React.Component {
                                     </Form>
                                     <hr />
                                     {this.state.listItem.map((item, index) =>
-                                        <StyleItem key={index} >
-                                            <Label for="btnRemove" onClick={this.editItem(index)}>{item}</Label>
-                                            <Button id="btnRemove" close onClick={this.removeItem(index)} />
-                                        </StyleItem>
+                                        <div key={index} >
+                                            <Container>
+                                                <Row>
+                                                    <Col lg="9"><Label for="btnRemove">{item}</Label></Col>
+                                                    <Col >
+                                                        <Optbtn onClick={this.editItem(index)}><i class="fa fa-pencil"></i></Optbtn>
+                                                        <Optbtn id="btnRemove" onClick={this.removeItem(index)} ><i class="fa fa-trash"></i></Optbtn>
+                                                    </Col>
+                                                </Row>
+                                            </Container>
+                                            <hr/>
+                                        </div>
                                     )}
                                 </CardBody>
                             </Card>
